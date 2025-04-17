@@ -24,21 +24,40 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'name' => $this->faker->name(),
+            'phone' => $this->faker->unique()->phoneNumber(),
+            'address' => $this->faker->address(),
+            'city' => $this->faker->city(),
+            'state' => $this->faker->state(),
+            'country' => $this->faker->country(),
+            'postal_code' => $this->faker->postcode(),
+            'profile_picture' => $this->faker->imageUrl(200, 200, 'people'),
+            'bio' => $this->faker->text(200),
+            'website' => $this->faker->url(),
+            'social_media_links' => json_encode([
+                'facebook' => $this->faker->url(),
+                'twitter' => $this->faker->url(),
+                'instagram' => $this->faker->url(),
+            ]),
+            'role' => 'user', // Default role
+            'status' => 'active', // Default status
+            'verification_code' => $this->faker->uuid(),
+            'verification_code_expiry' => '2025-04-01', // 30 minutes from now
+            'two_factor_code' => $this->faker->randomNumber(6, true),
+            'email' => $this->faker->unique()->safeEmail(),
+            'email_verified_at' => $this->faker->optional()->dateTime(),
+            'password' => Hash::make('password'), // Default password
+            // $table->string('password');
         ];
     }
 
     /**
      * Indicate that the model's email address should be unverified.
      */
-    public function unverified(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
-    }
+    // public function unverified(): static
+    // {
+    //     return $this->state(fn (array $attributes) => [
+    //         'email_verified_at' => null,
+    //     ]);
+    // }
 }
