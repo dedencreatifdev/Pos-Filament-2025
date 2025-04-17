@@ -26,6 +26,42 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('phone')
+                    ->tel()
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('address')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('city')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('state')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('country')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('postal_code')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('profile_picture')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('bio')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('website')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('social_media_links')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('role')
+                    ->required()
+                    ->maxLength(255)
+                    ->default('user'),
+                Forms\Components\TextInput::make('status')
+                    ->required()
+                    ->maxLength(255)
+                    ->default('active'),
+                Forms\Components\TextInput::make('verification_code')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('verification_code_expiry')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('two_factor_code')
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
@@ -43,6 +79,36 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('phone')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('address')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('city')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('state')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('country')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('postal_code')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('profile_picture')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('bio')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('website')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('social_media_links')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('role')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('verification_code')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('verification_code_expiry')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('two_factor_code')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),

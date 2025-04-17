@@ -57,10 +57,11 @@ class AppPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->font('Nunito')
+            ->maxContentWidth('full')
+            ->topNavigation()
 
-            
             ->tenant(Team::class)
             ->tenantRegistration(RegisterTeam::class)
-            ;
+        ;
     }
 }

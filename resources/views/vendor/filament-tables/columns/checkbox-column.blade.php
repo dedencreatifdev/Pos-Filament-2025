@@ -46,10 +46,12 @@
             ->merge($getExtraAttributes(), escape: false)
             ->class([
                 'fi-ta-checkbox flex items-center',
-                'px-3 py-4' => ! $isInline(),
+                'px-3 py-1 {{-- px-3 py-1  --}}' => ! $isInline(),
             ])
     }}
 >
+{{--  --}}
+
     <input type="hidden" value="{{ $state ? 1 : 0 }}" x-ref="newState" />
 
     <x-filament::input.checkbox
