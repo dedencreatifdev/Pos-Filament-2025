@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->string('phone')->unique();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('country')->nullable();
+            $table->string('phone')->unique();
+            $table->string('email')->unique();
             $table->string('postal_code')->nullable();
             $table->string('profile_picture')->nullable();
             $table->string('bio')->nullable();
@@ -27,9 +28,8 @@ return new class extends Migration
             $table->string('role')->default('user'); // 'admin', 'user', etc.
             $table->string('status')->default('active'); // 'active', 'inactive', 'banned', etc.
             $table->string('verification_code')->nullable();
-            $table->string('verification_code_expiry')->nullable();
+            $table->date('verification_code_expiry')->nullable();
             $table->string('two_factor_code')->nullable();
-            $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
 

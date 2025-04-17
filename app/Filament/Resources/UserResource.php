@@ -26,10 +26,6 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('phone')
-                    ->tel()
-                    ->required()
-                    ->maxLength(255),
                 Forms\Components\TextInput::make('address')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('city')
@@ -37,6 +33,14 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('state')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('country')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('phone')
+                    ->tel()
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('email')
+                    ->email()
+                    ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('postal_code')
                     ->maxLength(255),
@@ -58,13 +62,8 @@ class UserResource extends Resource
                     ->default('active'),
                 Forms\Components\TextInput::make('verification_code')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('verification_code_expiry')
-                    ->maxLength(255),
+                Forms\Components\DatePicker::make('verification_code_expiry'),
                 Forms\Components\TextInput::make('two_factor_code')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required()
                     ->maxLength(255),
                 Forms\Components\DateTimePicker::make('email_verified_at'),
                 Forms\Components\TextInput::make('password')
@@ -78,9 +77,10 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('id')
+                    ->label('ID')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('phone')
+                Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('address')
                     ->searchable(),
@@ -89,6 +89,10 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('state')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('country')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('phone')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('postal_code')
                     ->searchable(),
@@ -107,14 +111,21 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('verification_code')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('verification_code_expiry')
-                    ->searchable(),
+                    ->date()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('two_factor_code')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('email')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

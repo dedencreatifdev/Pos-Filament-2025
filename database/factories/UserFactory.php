@@ -34,11 +34,7 @@ class UserFactory extends Factory
             'profile_picture' => $this->faker->imageUrl(200, 200, 'people'),
             'bio' => $this->faker->text(200),
             'website' => $this->faker->url(),
-            'social_media_links' => json_encode([
-                'facebook' => $this->faker->url(),
-                'twitter' => $this->faker->url(),
-                'instagram' => $this->faker->url(),
-            ]),
+            'social_media_links' => $this->faker->url(),
             'role' => 'user', // Default role
             'status' => 'active', // Default status
             'verification_code' => $this->faker->uuid(),
