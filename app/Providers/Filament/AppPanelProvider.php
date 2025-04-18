@@ -8,6 +8,7 @@ use App\Models\Team;
 use Filament\Widgets;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Navigation\NavigationGroup;
 use Filament\Http\Middleware\Authenticate;
 use App\Filament\Pages\Tenancy\RegisterTeam;
 use Illuminate\Session\Middleware\StartSession;
@@ -59,9 +60,18 @@ class AppPanelProvider extends PanelProvider
             ->font('Nunito')
             ->maxContentWidth('full')
             ->topNavigation()
+            ->navigationGroups([
+                NavigationGroup::make()
+                     ->label('Produk')
+                     ->icon('heroicon-o-queue-list'),
+                NavigationGroup::make()
+                     ->label('User Management')
+                     ->icon('heroicon-o-users'),
+            ])
 
             ->tenant(Team::class)
             ->tenantRegistration(RegisterTeam::class)
+
         ;
     }
 }

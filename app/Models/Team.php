@@ -24,12 +24,21 @@ class Team extends Model
      * @return array<string, string>
      */
 
-     public function members(): BelongsToMany
+    public function members(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
     }
-     public function users(): BelongsToMany
+
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
+    }
+    public function produks(): BelongsToMany
+    {
+        return $this->belongsToMany(Produk::class);
+    }
+    public function kategoris(): BelongsToMany
+    {
+        return $this->belongsToMany(Kategori::class);
     }
 }
