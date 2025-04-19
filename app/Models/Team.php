@@ -41,4 +41,12 @@ class Team extends Model
     {
         return $this->belongsToMany(Kategori::class);
     }
+    public function units(): BelongsToMany
+    {
+        return $this->belongsToMany(Unit::class);
+    }
+    public function merks(): BelongsToMany
+    {
+        return $this->belongsToMany(Merk::class);
+    }
 }

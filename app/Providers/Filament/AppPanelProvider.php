@@ -59,7 +59,7 @@ class AppPanelProvider extends PanelProvider
             ])
             ->font('Nunito')
             ->maxContentWidth('full')
-            ->topNavigation()
+            // ->topNavigation()
             ->navigationGroups([
                 NavigationGroup::make()
                      ->label('Produk')

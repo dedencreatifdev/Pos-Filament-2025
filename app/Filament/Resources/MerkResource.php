@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\KategoriResource\Pages;
-use App\Filament\Resources\KategoriResource\RelationManagers;
-use App\Models\Kategori;
+use App\Filament\Resources\MerkResource\Pages;
+use App\Filament\Resources\MerkResource\RelationManagers;
+use App\Models\Merk;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,19 +13,20 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class KategoriResource extends Resource
+class MerkResource extends Resource
 {
-    protected static ?string $model = Kategori::class;
+    protected static ?string $model = Merk::class;
 
     // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationLabel = 'Kategori';
+
+    protected static ?string $navigationLabel = 'Merk';
     protected static ?string $navigationGroup = 'Produk';
-    protected static ?string $navigationBadge = 'Kategoris';
+    protected static ?string $navigationBadge = 'Merks';
     protected static ?string $navigationBadgeColor = 'success';
-    protected static ?string $slug = 'kategori';
-    protected static ?string $label = 'Kategori';
-    protected static ?string $pluralLabel = 'Kategoris';
-    protected static ?int $navigationSort = 2;
+    protected static ?string $slug = 'nerk';
+    protected static ?string $label = 'Merk';
+    protected static ?string $pluralLabel = 'Merks';
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -43,7 +44,6 @@ class KategoriResource extends Resource
     {
         return $table
             ->columns([
-
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('image'),
@@ -65,7 +65,7 @@ class KategoriResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageKategoris::route('/'),
+            'index' => Pages\ManageMerks::route('/'),
         ];
     }
 }

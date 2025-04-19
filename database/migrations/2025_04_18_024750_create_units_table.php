@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama');
             $table->timestamps();
         });
-        Schema::create('unit_team', function (Blueprint $table) {
+        Schema::create('team_unit', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('team_id')->constrained()->cascadeOnDelete();
             $table->foreignUuid('unit_id')->constrained()->cascadeOnDelete();

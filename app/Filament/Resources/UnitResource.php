@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\KategoriResource\Pages;
-use App\Filament\Resources\KategoriResource\RelationManagers;
-use App\Models\Kategori;
+use App\Filament\Resources\UnitResource\Pages;
+use App\Filament\Resources\UnitResource\RelationManagers;
+use App\Models\Unit;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,18 +13,19 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class KategoriResource extends Resource
+class UnitResource extends Resource
 {
-    protected static ?string $model = Kategori::class;
+    protected static ?string $model = Unit::class;
 
     // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationLabel = 'Kategori';
+
+    protected static ?string $navigationLabel = 'Satuan';
     protected static ?string $navigationGroup = 'Produk';
-    protected static ?string $navigationBadge = 'Kategoris';
+    protected static ?string $navigationBadge = 'Satuans';
     protected static ?string $navigationBadgeColor = 'success';
-    protected static ?string $slug = 'kategori';
-    protected static ?string $label = 'Kategori';
-    protected static ?string $pluralLabel = 'Kategoris';
+    protected static ?string $slug = 'satuan';
+    protected static ?string $label = 'Satuan';
+    protected static ?string $pluralLabel = 'Satuans';
     protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
@@ -34,8 +35,6 @@ class KategoriResource extends Resource
                 Forms\Components\TextInput::make('nama')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\FileUpload::make('image')
-                    ->image(),
             ]);
     }
 
@@ -43,10 +42,8 @@ class KategoriResource extends Resource
     {
         return $table
             ->columns([
-
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('image'),
             ])
             ->filters([
                 //
@@ -65,7 +62,7 @@ class KategoriResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageKategoris::route('/'),
+            'index' => Pages\ManageUnits::route('/'),
         ];
     }
 }

@@ -26,8 +26,19 @@ class Produk extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+
     public function getKategori(): BelongsTo
     {
-        return $this->belongsTo(Kategori::class);
+        return $this->belongsTo(Kategori::class, 'kategori_id', 'id');
+    }
+
+    public function getSatuan(): BelongsTo
+    {
+        return $this->belongsTo(Unit::class, 'unit_id', 'id');
+    }
+
+    public function getMerk(): BelongsTo
+    {
+        return $this->belongsTo(Merk::class, 'merk_id', 'id');
     }
 }

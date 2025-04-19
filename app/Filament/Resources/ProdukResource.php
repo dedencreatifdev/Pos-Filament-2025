@@ -55,10 +55,22 @@ class ProdukResource extends Resource
                     ->searchable()
                     ->preload()
                     ->required(),
-
+                Forms\Components\Select::make('merk_id')
+                    ->label('Merk')
+                    ->options(Filament::getTenant()->merks->pluck('nama', 'id'))
+                    ->searchable()
+                    ->preload()
+                    ->required(),
                 Forms\Components\TextInput::make('merk_id')
                     ->required()
                     ->maxLength(36),
+                Forms\Components\Select::make('unit_id')
+                    ->label('Satuan')
+                    ->options(Filament::getTenant()->units->pluck('nama', 'id'))
+                    ->searchable()
+                    ->preload()
+                    ->required(),
+
                 Forms\Components\TextInput::make('unit_id')
                     ->required()
                     ->maxLength(36),
@@ -104,66 +116,48 @@ class ProdukResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->label('ID')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('type')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('kode')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('kategori_id')
+
+                Tables\Columns\TextColumn::make('getKategori.nama')
+                    ->label('Kategori')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('merk_id')
+                Tables\Columns\TextColumn::make('getSatuan.nama')
+                    ->label('Satuan')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('unit_id')
+                Tables\Columns\TextColumn::make('getMerk.nama')
+                    ->label('Merk')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('deskripsi')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('spesifikasi')
-                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('harga')
-                    ->numeric()
-                    ->sortable(),
+                    ->alignEnd()
+                    ->numeric(),
+                Tables\Columns\TextColumn::make('hpp')
+                    ->default('0.00')
+                    ->label('Hpp')
+                    ->alignEnd()
+                    ->numeric(decimalPlaces: 2),
                 Tables\Columns\TextColumn::make('disc_max')
-                    ->numeric()
-                    ->sortable(),
+                    ->label('Disc Max')
+                    ->numeric(),
                 Tables\Columns\TextColumn::make('alert')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('berat')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('panjang')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('lebar')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('tinggi')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\ImageColumn::make('image'),
-                Tables\Columns\TextColumn::make('file')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->numeric(),
+
+                Tables\Columns\TextColumn::make('status'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
