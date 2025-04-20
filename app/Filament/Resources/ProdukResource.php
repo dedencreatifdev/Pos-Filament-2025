@@ -36,12 +36,16 @@ class ProdukResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('type')
+                    // ->inlineLabel()
                     ->required()
                     ->maxLength(25),
                 Forms\Components\TextInput::make('kode')
+                    ->columnSpan(2)
+                    // ->inlineLabel()
                     ->required()
                     ->maxLength(25),
                 Forms\Components\TextInput::make('nama')
+                    ->columnSpanFull()
                     ->required()
                     ->maxLength(50)
                     ->columnSpanFull(),
@@ -50,67 +54,86 @@ class ProdukResource extends Resource
                 //     ->maxLength(36),
 
                 Forms\Components\Select::make('kategori_id')
+                    ->inlineLabel()
                     ->label('Kategori')
                     ->options(Filament::getTenant()->kategoris->pluck('nama', 'id'))
                     ->searchable()
                     ->preload()
                     ->required(),
                 Forms\Components\Select::make('merk_id')
+                    ->inlineLabel()
                     ->label('Merk')
                     ->options(Filament::getTenant()->merks->pluck('nama', 'id'))
                     ->searchable()
                     ->preload()
                     ->required(),
                 Forms\Components\Select::make('unit_id')
+                    ->inlineLabel()
                     ->label('Satuan')
                     ->options(Filament::getTenant()->units->pluck('nama', 'id'))
                     ->searchable()
                     ->preload()
                     ->required(),
                 Forms\Components\Select::make('gudang_id')
-                    ->label('GUdang')
+                    ->inlineLabel()
+                    ->label('Gudang')
                     ->options(Filament::getTenant()->gudangs->pluck('nama', 'id'))
                     ->searchable()
                     ->preload()
                     ->required(),
 
                 Forms\Components\TextInput::make('spesifikasi')
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('deskripsi')
-                    ->rows(5)
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('harga')
-                    ->numeric()
-                    ->default(0),
-                Forms\Components\TextInput::make('disc_max')
-                    ->numeric()
-                    ->default(0),
-                Forms\Components\TextInput::make('alert')
-                    ->numeric()
-                    ->default(0),
-                Forms\Components\TextInput::make('berat')
-                    ->numeric()
-                    ->default(0),
-                Forms\Components\TextInput::make('panjang')
-                    ->numeric()
-                    ->default(0),
-                Forms\Components\TextInput::make('lebar')
-                    ->numeric()
-                    ->default(0),
-                Forms\Components\TextInput::make('tinggi')
-                    ->numeric()
-                    ->default(0),
-                Forms\Components\FileUpload::make('image')
-                    ->image(),
-                Forms\Components\TextInput::make('file')
+                    ->inlineLabel()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('status')
+                    ->inlineLabel()
                     ->required()
                     ->maxLength(255)
                     ->default('active'),
+
+
+                Forms\Components\Textarea::make('deskripsi')
+                    ->columnSpanFull()
+                    ->rows(5)
+                    ->columnSpanFull(),
+                Forms\Components\TextInput::make('harga')
+                    ->inlineLabel()
+                    ->numeric()
+                    ->default(0),
+                Forms\Components\TextInput::make('disc_max')
+                    ->inlineLabel()
+                    ->numeric()
+                    ->default(0),
+                Forms\Components\TextInput::make('alert')
+                    ->inlineLabel()
+                    ->numeric()
+                    ->default(0),
+                Forms\Components\TextInput::make('berat')
+                    ->inlineLabel()
+                    ->numeric()
+                    ->default(0),
+                Forms\Components\TextInput::make('panjang')
+                    ->inlineLabel()
+                    ->numeric()
+                    ->default(0),
+                Forms\Components\TextInput::make('lebar')
+                    ->inlineLabel()
+                    ->numeric()
+                    ->default(0),
+                Forms\Components\TextInput::make('tinggi')
+                    ->inlineLabel()
+                    ->numeric()
+                    ->default(0),
+                Forms\Components\FileUpload::make('image')
+                    ->columnSpanFull()
+                    ->image(),
+                Forms\Components\TextInput::make('file')
+                    ->columnSpanFull()
+                    ->maxLength(255),
+
             ])
             ->columns(3)
-            ->inlineLabel();
+        ;
     }
 
     public static function table(Table $table): Table
