@@ -24,9 +24,9 @@ class ManageProduks extends ManageRecords
                 ->label('Actions')
                 ->button()
                 ->icon('heroicon-o-plus')
-                // ->color('success')
+                ->color('success')
                 // ->iconPosition('after')
-                ->size(ActionSize::Small)
+                ->size(ActionSize::ExtraSmall)
                 ->actions([
                     Actions\CreateAction::make()
                         ->createAnother(false)

@@ -61,24 +61,24 @@ class ProdukResource extends Resource
                     ->searchable()
                     ->preload()
                     ->required(),
-                Forms\Components\TextInput::make('merk_id')
-                    ->required()
-                    ->maxLength(36),
                 Forms\Components\Select::make('unit_id')
                     ->label('Satuan')
                     ->options(Filament::getTenant()->units->pluck('nama', 'id'))
                     ->searchable()
                     ->preload()
                     ->required(),
+                Forms\Components\Select::make('gudang_id')
+                    ->label('GUdang')
+                    ->options(Filament::getTenant()->gudangs->pluck('nama', 'id'))
+                    ->searchable()
+                    ->preload()
+                    ->required(),
 
-                Forms\Components\TextInput::make('unit_id')
-                    ->required()
-                    ->maxLength(36),
+                Forms\Components\TextInput::make('spesifikasi')
+                    ->maxLength(255),
                 Forms\Components\Textarea::make('deskripsi')
                     ->rows(5)
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('spesifikasi')
-                    ->maxLength(255),
                 Forms\Components\TextInput::make('harga')
                     ->numeric()
                     ->default(0),
@@ -109,7 +109,8 @@ class ProdukResource extends Resource
                     ->maxLength(255)
                     ->default('active'),
             ])
-            ->columns(3);
+            ->columns(3)
+            ->inlineLabel();
     }
 
     public static function table(Table $table): Table
@@ -132,6 +133,9 @@ class ProdukResource extends Resource
                 Tables\Columns\TextColumn::make('getMerk.nama')
                     ->label('Merk')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('getMerk.nama')
+                    ->label('Gudang')
+                    ->searchable(),
 
                 Tables\Columns\TextColumn::make('harga')
                     ->alignEnd()
@@ -147,8 +151,12 @@ class ProdukResource extends Resource
                 Tables\Columns\TextColumn::make('alert')
                     ->numeric(),
 
+                Tables\Columns\TextColumn::make('getGudang.nama')
+                    ->label('Gudang')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('status'),
             ])
+            ->striped()
             ->filters([
                 //
             ])

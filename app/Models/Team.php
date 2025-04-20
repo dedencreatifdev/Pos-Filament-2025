@@ -49,4 +49,8 @@ class Team extends Model
     {
         return $this->belongsToMany(Merk::class);
     }
+    public function gudangs(): BelongsToMany
+    {
+        return $this->belongsToMany(Gudang::class);
+    }
 }

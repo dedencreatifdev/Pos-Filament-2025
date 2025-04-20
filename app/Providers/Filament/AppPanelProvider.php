@@ -62,11 +62,14 @@ class AppPanelProvider extends PanelProvider
             // ->topNavigation()
             ->navigationGroups([
                 NavigationGroup::make()
-                     ->label('Produk')
-                     ->icon('heroicon-o-queue-list'),
+                    ->label('Produk')
+                    ->icon('heroicon-o-queue-list'),
                 NavigationGroup::make()
-                     ->label('User Management')
-                     ->icon('heroicon-o-users'),
+                    ->label('Master Data')
+                    ->icon('heroicon-o-clipboard-document-list'),
+                NavigationGroup::make()
+                    ->label('User Management')
+                    ->icon('heroicon-o-users'),
             ])
 
             ->tenant(Team::class)

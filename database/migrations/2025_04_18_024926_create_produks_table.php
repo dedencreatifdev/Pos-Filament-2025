@@ -35,9 +35,10 @@ return new class extends Migration
 
             $table->string('image')->nullable();
             $table->string('file')->nullable();
+            $table->foreignUuid('gudang_id')->constrained()->cascadeOnDelete();
             $table->string('status')->default('active'); // 'active', 'inactive', 'banned', etc.
 
-            
+
             $table->timestamps();
         });
         Schema::create('produk_team', function (Blueprint $table) {

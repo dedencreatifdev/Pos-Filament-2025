@@ -41,4 +41,9 @@ class Produk extends Model
     {
         return $this->belongsTo(Merk::class, 'merk_id', 'id');
     }
+
+    public function getGudang(): BelongsTo
+    {
+        return $this->belongsTo(Gudang::class, 'gudang_id', 'id');
+    }
 }

@@ -12,7 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('gudangs', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('nama');
+            $table->string('image')->nullable();
+            $table->timestamps();
+        });
+        Schema::create('gudang_team', function (Blueprint $table) {
             $table->id();
+            $table->foreignUuid('team_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('gudang_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -23,5 +31,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('gudangs');
+        Schema::dropIfExists('gudang_team');
     }
 };
