@@ -37,7 +37,7 @@ class MerkResource extends Resource
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('image')
                     ->image(),
-            ]);
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table

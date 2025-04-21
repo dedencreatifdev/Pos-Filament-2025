@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources\MerkResource\Pages;
 
-use App\Filament\Resources\MerkResource;
 use Filament\Actions;
+use Filament\Support\Enums\ActionSize;
+use App\Filament\Resources\MerkResource;
 use Filament\Resources\Pages\ManageRecords;
 
 class ManageMerks extends ManageRecords
@@ -13,7 +14,16 @@ class ManageMerks extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->label('Tambah Merk')
+                ->createAnother(false)
+                ->button()
+                ->icon('heroicon-o-squares-plus')
+                ->color('success')
+                // ->iconPosition('after')
+                ->size(ActionSize::ExtraSmall)
+                ->modalHeading('Tambah New Produk')
+                ->modalSubheading('Create a new produk record.'),
         ];
     }
 }

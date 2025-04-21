@@ -5,17 +5,23 @@ namespace App\Filament\Resources;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Produk;
+use Filament\Forms\Set;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Facades\Filament;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Split;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Section;
+
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\Actions\Action;
 use App\Filament\Resources\ProdukResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ProdukResource\RelationManagers;
-
-use Filament\Forms\Components\Actions\Action;
-use Filament\Forms\Set;
 
 class ProdukResource extends Resource
 {
@@ -35,46 +41,50 @@ class ProdukResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('type')
-                    // ->inlineLabel()
+
+                Select::make('type')
                     ->required()
-                    ->maxLength(25),
-                Forms\Components\TextInput::make('kode')
+                    ->options([
+                        'Barang' => 'Barang',
+                        'Jasa' => 'Jasa',
+                    ]),
+                TextInput::make('kode')
                     ->columnSpan(2)
                     // ->inlineLabel()
                     ->required()
                     ->maxLength(25),
-                Forms\Components\TextInput::make('nama')
+                TextInput::make('nama')
                     ->columnSpanFull()
                     ->required()
                     ->maxLength(50)
                     ->columnSpanFull(),
-                // Forms\Components\TextInput::make('kategori_id')
+
+                // TextInput::make('kategori_id')
                 //     ->required()
                 //     ->maxLength(36),
 
-                Forms\Components\Select::make('kategori_id')
+                Select::make('kategori_id')
                     ->inlineLabel()
                     ->label('Kategori')
                     ->options(Filament::getTenant()->kategoris->pluck('nama', 'id'))
                     ->searchable()
                     ->preload()
                     ->required(),
-                Forms\Components\Select::make('merk_id')
+                Select::make('merk_id')
                     ->inlineLabel()
                     ->label('Merk')
                     ->options(Filament::getTenant()->merks->pluck('nama', 'id'))
                     ->searchable()
                     ->preload()
                     ->required(),
-                Forms\Components\Select::make('unit_id')
+                Select::make('unit_id')
                     ->inlineLabel()
                     ->label('Satuan')
                     ->options(Filament::getTenant()->units->pluck('nama', 'id'))
                     ->searchable()
                     ->preload()
                     ->required(),
-                Forms\Components\Select::make('gudang_id')
+                Select::make('gudang_id')
                     ->inlineLabel()
                     ->label('Gudang')
                     ->options(Filament::getTenant()->gudangs->pluck('nama', 'id'))
@@ -82,54 +92,63 @@ class ProdukResource extends Resource
                     ->preload()
                     ->required(),
 
-                Forms\Components\TextInput::make('spesifikasi')
+                TextInput::make('spesifikasi')
                     ->inlineLabel()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('status')
+                TextInput::make('status')
                     ->inlineLabel()
                     ->required()
                     ->maxLength(255)
                     ->default('active'),
 
 
-                Forms\Components\Textarea::make('deskripsi')
+                Textarea::make('deskripsi')
                     ->columnSpanFull()
                     ->rows(5)
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('harga')
+                TextInput::make('harga')
                     ->inlineLabel()
                     ->numeric()
                     ->default(0),
-                Forms\Components\TextInput::make('disc_max')
+                TextInput::make('disc_max')
                     ->inlineLabel()
                     ->numeric()
                     ->default(0),
-                Forms\Components\TextInput::make('alert')
+                TextInput::make('alert')
                     ->inlineLabel()
                     ->numeric()
                     ->default(0),
-                Forms\Components\TextInput::make('berat')
+                TextInput::make('berat')
                     ->inlineLabel()
                     ->numeric()
                     ->default(0),
-                Forms\Components\TextInput::make('panjang')
+                TextInput::make('panjang')
                     ->inlineLabel()
                     ->numeric()
                     ->default(0),
-                Forms\Components\TextInput::make('lebar')
+                TextInput::make('lebar')
                     ->inlineLabel()
                     ->numeric()
                     ->default(0),
-                Forms\Components\TextInput::make('tinggi')
+                TextInput::make('tinggi')
                     ->inlineLabel()
                     ->numeric()
                     ->default(0),
-                Forms\Components\FileUpload::make('image')
-                    ->columnSpanFull()
-                    ->image(),
-                Forms\Components\TextInput::make('file')
-                    ->columnSpanFull()
-                    ->maxLength(255),
+
+                    Split::make([
+                        Section::make([
+                            FileUpload::make('image')
+                                ->columnSpan(2)
+                                ->image(),
+                        ]),
+                        Section::make([
+                            TextInput::make('file')
+                                ->columnSpan(1)
+                                ->maxLength(255),
+                        ])->grow(false),
+                    ])
+                    ->from('md')
+                    ->columnSpan(3)
 
             ])
             ->columns(3)
@@ -157,7 +176,7 @@ class ProdukResource extends Resource
                     ->label('Merk')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('getMerk.nama')
-                    ->label('Gudang')
+                    ->label('Merk')
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('harga')

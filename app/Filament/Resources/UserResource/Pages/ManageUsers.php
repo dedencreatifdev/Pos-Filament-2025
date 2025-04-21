@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources\UserResource\Pages;
 
-use App\Filament\Resources\UserResource;
 use Filament\Actions;
+use Filament\Support\Enums\ActionSize;
+use App\Filament\Resources\UserResource;
 use Filament\Resources\Pages\ManageRecords;
 
 class ManageUsers extends ManageRecords
@@ -13,7 +14,14 @@ class ManageUsers extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->label('Tambah User')
+                ->createAnother(false)
+                ->button()
+                ->icon('heroicon-o-squares-plus')
+                ->color('success')
+                // ->iconPosition('after')
+                ->size(ActionSize::ExtraSmall),
         ];
     }
 }

@@ -15,12 +15,17 @@ class ManageUnits extends ManageRecords
     {
         return [
             Actions\CreateAction::make()
-            ->button()
-            ->label('Tambah Satuan')
-                ->icon('heroicon-o-plus')
+                ->button()
+                ->label('Tambah Satuan')
+                ->createAnother(false)
+                ->icon('heroicon-o-squares-plus')
                 // ->color('success')
-                ->iconPosition('after')
-                ->size(ActionSize::Small),
+                // ->iconPosition('after')
+                ->color('primary')
+                ->size(ActionSize::Small)
+                ->modalHeading('Tambah New Satuan')
+                ->modalWidth('lg') // ExtraSmall, Small, Medium, Large, ExtraLarge, TwoExtraLarge, ThreeExtraLarge, FourExtraLarge, FiveExtraLarge, SixExtraLarge, SevenExtraLarge, and Screen
+                ->modalSubheading('Create a new satuan record.'),
         ];
     }
 }

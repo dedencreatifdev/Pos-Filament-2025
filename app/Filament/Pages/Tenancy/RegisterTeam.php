@@ -2,8 +2,9 @@
 namespace App\Filament\Pages\Tenancy;
 
 use App\Models\Team;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Support\Enums\Alignment;
+use Filament\Forms\Components\TextInput;
 use Filament\Pages\Tenancy\RegisterTenant;
 
 class RegisterTeam extends RegisterTenant
@@ -22,7 +23,8 @@ class RegisterTeam extends RegisterTenant
                     ->required()
                     ->unique(Team::class, 'slug', fn ($record) => $record),
                 // ...
-            ]);
+            ])
+            ->footerActionsAlignment(Alignment::End);
     }
 
     protected function handleRegistration(array $data): Team

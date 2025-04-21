@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -23,6 +24,11 @@ class Team extends Model
      *
      * @return array<string, string>
      */
+
+     public function userProfile(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function members(): BelongsToMany
     {

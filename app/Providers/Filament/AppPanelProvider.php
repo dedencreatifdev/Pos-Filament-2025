@@ -11,6 +11,7 @@ use Filament\Support\Colors\Color;
 use Filament\Navigation\NavigationGroup;
 use Filament\Http\Middleware\Authenticate;
 use App\Filament\Pages\Tenancy\RegisterTeam;
+use App\Filament\Pages\Tenancy\EditTeamProfile;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -31,7 +32,12 @@ class AppPanelProvider extends PanelProvider
             ->path('')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'danger' => Color::Rose,
+                'gray' => Color::Gray,
+                'info' => Color::Blue,
+                'primary' => Color::Indigo,
+                'success' => Color::Emerald,
+                'warning' => Color::Orange,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -59,7 +65,7 @@ class AppPanelProvider extends PanelProvider
             ])
             ->font('Nunito')
             ->maxContentWidth('full')
-            // ->topNavigation()
+            ->topNavigation(true)
             ->navigationGroups([
                 NavigationGroup::make()
                     ->label('Produk')
@@ -74,7 +80,7 @@ class AppPanelProvider extends PanelProvider
 
             ->tenant(Team::class)
             ->tenantRegistration(RegisterTeam::class)
-
+            ->tenantProfile(EditTeamProfile::class)
         ;
     }
 }
